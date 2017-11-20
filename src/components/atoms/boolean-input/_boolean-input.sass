@@ -1,0 +1,121 @@
+@import "~@/assets/styles/_main.sass"
+
+//============================================
+// fieldset-ceckbox-radio component
+//============================================
+
+.booleanInput_field
+  display: inline-block
+  position: relative
+  padding: $space-quarter 0 $space-quarter $space
+  text-align: left
+
+.booleanInput_input[type="checkbox"],
+.booleanInput_input[type="radio"]
+  +pos(50% 0, top left)
+  visibility: hidden
+
+.booleanInput_label
+  position: relative
+  padding-left: 10px
+  line-height: 1.4
+
+.booleanInput_label,
+.booleanInput_input
+  display: inline-block
+
+
+// checkbox
+//============================================
+// NOTE: this is a kind of tricky thing
+// using before and after as decorators for checkbox (which is hidden)
+// toggling the styles depending on input:checked
+
+// base styling
+.booleanInput_label-checkbox::before
+  +pos(50% -18px, top left)
+  display: block
+  width: 19px
+  height: 19px
+  margin-top: -9px
+  transition: all .2s
+  content: ""
+
+// ensure the before is pushed in front to allow clicking without problems
+.booleanInput_label-checkbox::before
+  transition: all .2s
+  border: 1px solid $gray
+  background: white
+  z-index: 10000
+
+// ensure the before is pushed in front to allow clicking without problems
+.booleanInput_label-checkbox::after
+  +pos(50% -11px, top left)
+  display: block
+  width: 6px
+  height: 11px
+  margin-top: -6px
+  transform: rotate(40deg)
+  border-right: 1px solid black
+  border-bottom: 1px solid black
+  border-color: transparent
+  content: ""
+  z-index: 10000
+
+
+// show the checkmark if input is checked
+input:checked + .booleanInput_input_checkmark
+  transform: scale(1)
+  opacity: 1
+
+// damn designers!
+// toggle all styles depending on input :checked
+input:checked + .booleanInput_label-checkbox::after
+  border-color: $white
+
+input:checked + .booleanInput_label-checkbox::before
+  border: 1px solid $primary
+  background: $primary
+
+// yet another linking styles
+.booleanInput_label a
+  position: relative
+
+.booleanInput_label a::after
+  +pos(0, right bottom left)
+  height: 1px
+  background: $primary
+  content: ''
+
+
+// radio
+//============================================
+
+.booleanInput_input[type="radio"]
+  position: relative
+  visibility: hidden
+
+// ensure the before is pushed in front to allow clicking without problems
+.booleanInput_label-radio::before
+  @extend .booleanInput_label-checkbox::before
+  border-radius: 50%
+
+// ensure the before is pushed in front to allow clicking without problems
+.booleanInput_label-radio::after
+  @extend .booleanInput_label-checkbox::before
+  display: block
+  transform: scale(0.4)
+  transform-origin: center
+  transition: all .2s
+  border: none
+  border-radius: 50%
+  background: $white
+  z-index: 9999
+
+input:checked + .booleanInput_label-radio::before
+  border: 1px solid $primary
+  background: $primary
+
+input:checked + .booleanInput_label-radio::after
+  background: $white
+  z-index: 999999

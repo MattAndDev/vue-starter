@@ -1,0 +1,33 @@
+// core
+@import "~@/assets/styles/_main.sass"
+
+// base heading palcehodler class
+%heading
+  margin: 0
+  font-family: $font-heading
+  font-weight: 500
+  line-height: 1.4
+
+// h1 type as modifier
+.heading-h1
+  @extend %heading
+  margin-bottom: $space
+  font-size: 20px
+  line-height: 1.6
+  +mq(sm)
+    margin-bottom: $space-duble
+    font-size: 24px
+
+// h2 type as modifier
+.heading-h2
+  @extend %heading
+  margin-bottom: $space
+  font-size: 18px
+  +mq(sm)
+    font-size: 22px
+
+// h3 type as modifier
+.heading-h3
+  @extend %heading
+  font-size: 18px
+  font-weight: 600

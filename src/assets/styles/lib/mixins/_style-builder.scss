@@ -1,0 +1,85 @@
+// ============================================
+// General purpose style builder
+// =
+// Used to build styles out of scss maps
+// Consider using this for default componetn appearance and feine the basic styles
+// Especiall ycrucial for atoms
+// ============================================
+
+// main mixing, calling in for helpers
+@mixin style-builder($classname, $style-map) {
+  // build the main class
+  @include style-builder_rules($classname, map-get($style-map, 'base'));
+  // build hover for main class
+  @include style-builder_states($classname, map-deep-get($style-map, 'base', 'states'));
+  // build modifiers
+  @include style-builder_modifiers($classname, map-deep-get($style-map, 'modifiers'));
+}
+
+// main class builder
+@mixin style-builder_rules($classname, $style-map) {
+  .#{$classname} {
+    // build styles
+    @include style-builder_properties($style-map);
+    // build responsive
+    @include style-builder_responsive(map-get($style-map, 'responsive'));
+  }
+}
+
+// main hover builder
+@mixin style-builder_hover ($classname, $style-map) {
+  .no-touch .#{$classname}:hover {
+    // build styles
+    @include style-builder_properties($style-map);
+  }
+}
+// main states builder
+@mixin style-builder_states ($classname, $states-map) {
+  @if $states-map {
+    @each $state, $style-map in $states-map {
+      @if state == 'hover' {
+        .no-touch .#{$classname}:#{$state} {
+          @include style-builder_properties($style-map);
+        }
+      }
+      @else {
+        .#{$classname}:#{$state} {
+          @include style-builder_properties($style-map);
+        }
+      }
+    }
+  }
+}
+
+// main modifier builders
+@mixin style-builder_modifiers ($classname, $modifiers-map) {
+  @if $modifiers-map {
+    @each $modifier, $style-map in $modifiers-map {
+      .#{$classname}-#{$modifier} {
+        @include style-builder_properties($style-map);
+        @include style-builder_responsive(map-get($style-map, 'responsive'));
+      }
+      @include style-builder_hover(#{$classname}-#{$modifier}, map-get($style-map, 'hover'));
+    }
+  }
+}
+
+// main responsive builder
+@mixin style-builder_responsive ($size-map) {
+  @if $size-map {
+    @each $mq, $style-map in $size-map {
+      @include mq("#{$mq}") {
+        @include style-builder_properties($style-map);
+      }
+    }
+  }
+}
+
+// style buidler itself
+@mixin style-builder_properties ($style-map) {
+  @each $property, $value in $style-map {
+    @if type-of($value) != 'map' {
+      #{$property}: $value;
+    }
+  }
+}

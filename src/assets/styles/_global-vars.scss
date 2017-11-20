@@ -1,0 +1,80 @@
+//============================================
+// Global variables
+//============================================
+
+
+// Colors
+//============================================
+
+$primary:           #FFB300;
+$primary-light:     #FFF7E2;
+$secondary:         #55AD9A;
+$secondary-light:   #AAD6CC;
+
+$yellow:            $primary;
+$green:             $secondary;
+$cyan:              #73E5CF;
+$blue:              #297EE1;
+$violet:            #9270F6;
+$red:               #E7808D;
+
+
+$red-error:         $red;
+
+$black:             #31303E;
+$white:             #FFFFFF;
+
+$gray-light:        #F2F2F2;
+$gray-mid-light:    #E3E3E3;
+$gray:              #D8D8D8;
+$gray-mid-dark:     #BEBEBE;
+$gray-dark:         #9B9B9B;
+
+
+// Pass on for semantics
+$color-text:  $black;
+$color-bg:    $white;
+
+
+$breakpoints: (
+  xs: (
+    gutter: 16px,
+    width:416px
+  ),
+  sm: (
+    gutter: 20px,
+    width: 728px
+  ),
+  md: (
+    gutter: 22px,
+    width: 966px
+  ),
+  lg: (
+    gutter: 30px,
+    width: 1290px
+  ),
+  xl: (
+    gutter: 30px,
+    width: 1490px
+  )
+);
+
+
+// Dimensions
+//============================================
+
+$space:           24px;
+$space-half:      $space * 0.5;
+$space-quarter:   $space * 0.25;
+$space-duble:     $space * 2;
+$space-triple:    $space * 3;
+$space-quad:      $space * 4;
+
+// Typography
+//============================================
+
+$font:          "Open Sans", "Helvetica Neue", Arial, sans-serif;
+$font-heading:  $font;
+$font-mono:     monospace, monospace;
+$font-size:     15px;
+$line-height:   ($space / $font-size);

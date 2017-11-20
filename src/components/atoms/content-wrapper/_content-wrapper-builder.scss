@@ -1,0 +1,43 @@
+// core
+@import "~@/assets/styles/_main.sass";
+
+// build the content wrapper classes
+@mixin content-wrapper-builder() {
+  // mobile first so no media query
+  .content-wrapper {
+    max-width: map-deep-get($breakpoints, 'xs', 'width');
+    margin: 0 auto;
+    padding: 0 map-deep-get($breakpoints, 'xs', 'gutter');
+  }
+  // default wraps
+  @each $size, $values in $breakpoints {
+    @include mq("#{$size}") {
+      .content-wrapper {
+        max-width: map-get($values, 'width');
+        padding: 0 map-get($values, 'gutter')
+      }
+    }
+  }
+  // above-#{breakpoint} modifier
+  @each $size, $values in $breakpoints {
+    .content-wrapper.above-#{$size}{
+      max-width: 100%;
+      padding: 0;
+    }
+    @include mq("#{$size}") {
+      .content-wrapper.above-#{$size}{
+        max-width: map-get($values, 'width');
+        padding: 0 map-get($values, 'gutter')
+      }
+    }
+    // until-#{breakpoint} modifier
+    @each $size, $values in $breakpoints {
+      @include mq("#{$size}") {
+        .content-wrapper.until-#{$size}{
+          max-width: map-get($values, 'width');
+          padding: 0 map-get($values, 'gutter')
+        }
+      }
+    }
+  }
+}

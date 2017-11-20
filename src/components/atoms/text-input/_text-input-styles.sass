@@ -1,0 +1,69 @@
+// core
+@import "~@/assets/styles/_main.sass"
+
+// wrap (<textfield>)
+.textInput
+  position: relative
+  margin-bottom: $space-half + $space-quarter
+  text-align: left
+
+// label
+.textInput_label
+  display: block
+  font-size: 14px
+
+// label for optional text (right)
+.textInput_label_optional
+  float: right
+  color: $gray-dark
+
+// input field
+.textInput_field
+  display: block
+  width: 100%
+  height: 40px
+  padding: 0 5px
+  transition: border-color .2s
+  border: 1px solid $gray-dark
+  font: $font
+  font-size: 14px
+  font-weight: 500
+  line-height: 40px
+
+// input field focus
+.textInput_field:focus
+  border-color: $primary
+  outline: 0
+
+// error controllers
+.textInput.has-error .textInput_field
+  border-color: $red-error
+
+.textInput.has-error .textInput_label
+  color: $red-error
+
+// error text
+.textInput_error
+  +pos(-16px 0, bottom left)
+  color: $red-error
+  font-size: 12px
+  line-height: 1
+
+// show password
+// only when type === password
+
+.textInput_field_icon_password
+  +pos(28px 5px, top right)
+
+.textInput_field_icon_password.hide::after
+  +pos(13px 0, top left)
+  display: block
+  width: 100%
+  height: 1px
+  transform: rotate(45deg)
+  background: $black
+  content: ""
+  cursor: pointer
+
+.textInput_field_icon_password
+  cursor: pointer
