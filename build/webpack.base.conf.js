@@ -3,6 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const {GenerateSW} = require('workbox-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -77,5 +78,14 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new GenerateSW({
+      globDirectory: './dist',
+      globPatterns: ['**/*.{html,js}'],
+      swDest: path.join( '.', 'sw.js'),
+      clientsClaim: true,
+      skipWaiting: true
+    })
+  ]
 }
